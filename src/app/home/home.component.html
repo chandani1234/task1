@@ -1,0 +1,65 @@
+<form (ngSubmit)="f.form.valid && onsubmit(f)" #f=ngForm>
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Employee_Name</label>
+                <input type="text" class="form-control" [(ngModel)]="home.employee_name" name="employee_name" required #employee_name="ngModel" pattern="[a-z]{5,10}">
+                <span *ngIf="f.submitted && employee_name.errors?.required">Please enter valid employee_name</span>
+                <span *ngIf="f.submitted && employee_name.errors?.pattern">Invalid employee_name</span>
+            </div>
+            <div class="form-group">
+                <label>Employee_Address</label>
+                <input type="text" class="form-control" [(ngModel)]="home.employee_address" name="employee_address" required #employee_address="ngModel" pattern="[a-z]{3,10}"> 
+                <!-- <span *ngIf="f.submitted && employee_address.errors?.required">Please enter valid emplpoyee_address</span>
+                <span *ngIf="f.submitted && employee_address.errors?.pattern">Invalid employee_address</span> -->
+            </div>
+            
+            <div class="form-group">
+                <label>Employee_Email</label>
+                <input type="text" class="form-control" [(ngModel)]="home.employee_email" name="email" required #employee_email="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                   <span *ngIf="f.submitted && employee_email.errors?.required">Please enter valid emplpoyee_email</span>
+                <span *ngIf="f.submitted && employee_email.errors?.pattern">Invalid employee_email</span> 
+               
+            </div>
+            <div class="form-group">
+                <label>Employee_Contact</label>
+                <input type="text" class="form-control" [(ngModel)]="home.employee_contact" name="contact" required #employee_contact="ngModel"  pattern="^((\\+91-?)|0)?[0-9]{10}$"> 
+                <span *ngIf="f.submitted && employee_contact.errors?.required">Please enter valid employee_contact</span>
+                <span *ngIf="f.submitted && employee_contact.errors?.pattern">Invalid employee_contact</span>
+               
+            </div>
+            <br/>
+            <button class="btn btn-primary">{{title}}</button>
+        </div>
+    </div>
+    </form>
+    <br/>
+    <table border="1" align="center"  class="table-bordered">
+        <tr>
+            <td><b>Employee_Name</b></td>
+            <td><b>Employee_Address</b></td>
+            <td><b>Employee_Email</b></td>
+            <td><b>Employee_Contact</b></td>
+            <td><b>Status progress-bar Report</b></td>
+            
+            <td><b>Delete</b></td>
+            <td><b>Edit</b></td>
+        </tr>
+        <tr *ngFor="let obj of homearray ; let j=index">
+            
+            <td>{{obj.employee_name}}</td>
+            <td>{{obj.employee_address}}</td>
+            <td>{{obj.employee_email}}</td>
+            <td>{{obj.employee_contact}}</td>
+            
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+              </div>
+              <!-- <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">10%</div>
+              </div> -->
+
+            <td><a class="btn  btn-sm  text-white btn-danger" (click)="delete(j)">Delete</a></td>
+            <td><a class="btn  btn-sm  text-white btn-success" (click)="edit(obj,j)">Edit</a></td>
+        </tr>
+    </table>
